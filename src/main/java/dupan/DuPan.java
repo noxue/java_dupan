@@ -9,7 +9,6 @@ import org.apache.http.client.CookieStore;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -17,7 +16,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -209,6 +207,15 @@ public class DuPan {
         return false;
     }
 
+    /**
+     * 退出登陆，会自动删除 cookie 信息
+     * @throws IOException
+     */
+    public void logout() throws IOException {
+        String url = "https://passport.baidu.com/?logout&u=https%3A%2F%2Fpan.baidu.com%2F";
+        HttpGet get = new HttpGet("https://pan.baidu.com/disk/home");
+        httpClient.execute(get);
+    }
 
     /***
      * 列出网盘指定目录的文件
